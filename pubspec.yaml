@@ -43,6 +43,7 @@ dependencies:
   flutter_local_notifications: 9.0.3
   flutter_native_timezone: 
   intl: 
+  sqflite: 
   
 
 dev_dependencies:
