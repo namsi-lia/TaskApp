@@ -103,6 +103,7 @@ class _HomePageState extends State<HomePage> {
 
               ),
             ),
+            Spacer(),
             task.isCompleted==1
             ?Container()
             :  _bottomSheetButton
@@ -111,6 +112,16 @@ class _HomePageState extends State<HomePage> {
                 Get.back();
               }, 
               clr: primaryClr,
+              context:context
+              
+              ),
+              SizedBox(height: 20,),
+              _bottomSheetButton
+              (label: "Delete Task", 
+              onTap: (){
+                Get.back();
+              }, 
+              clr:pinkish,
               context:context
               
               )
@@ -133,13 +144,14 @@ class _HomePageState extends State<HomePage> {
         margin: EdgeInsets.symmetric(vertical: 4),
         height: 55,
         width: MediaQuery.of(context).size.width*0.9,
-        color: isClose==true?Colors.red:clr,
+        
         decoration: BoxDecoration(
           border: Border.all(
             width: 2,
             color: isClose==true?Colors.red:clr
           ),
-          borderRadius: BorderRadius.circular(20)
+          borderRadius: BorderRadius.circular(20),
+          color: isClose==true?Colors.red:clr,
         ),
       ),
     );
