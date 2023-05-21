@@ -3,6 +3,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:get/get.dart';
 import 'package:taskapp/models/Task.dart';
+import 'package:taskapp/ui/Notified.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 class NotifyHelper {
@@ -67,7 +68,8 @@ final InitializationSettings initializationSettings =
          uiLocalNotificationDateInterpretation:
              UILocalNotificationDateInterpretation.absoluteTime,
              
-             matchDateTimeComponents:DateTimeComponents.time 
+             matchDateTimeComponents:DateTimeComponents.time,
+             payload: "{$task.title}| "+"{$task.note}|"
              
              
              );
@@ -115,7 +117,7 @@ final InitializationSettings initializationSettings =
     } else {
       print("Notification Done");
     }
-     Get.to(()=>Container(color: Colors.white,));
+     Get.to(()=>NotifiedPage(label:payload));
   }
 
 
