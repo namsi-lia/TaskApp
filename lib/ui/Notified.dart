@@ -16,9 +16,19 @@ class NotifiedPage extends StatelessWidget {
         backgroundColor: Get.isDarkMode?Colors.grey[600]:Colors.white,
         leading: IconButton(
           onPressed: () => Get.back(), 
-          icon: Icon(Icons.arrow_back)),
+          icon: Icon(Icons.arrow_back,
+          color: Get.isDarkMode?Colors.white:Colors.grey,
+          )
+          
+          
+          ),
+          title: Text(this.label.toString().split("|")[0],
+          style: TextStyle(color: Colors.black),
+          
+          
+          ),
       ),
-
+      
     );
   }
 }

@@ -12,7 +12,8 @@ import 'package:taskapp/ui/add_task_bar.dart';
 import 'package:taskapp/ui/theme.dart';
 import 'package:taskapp/ui/widgets/button.dart';
 import 'package:taskapp/ui/widgets/task_tile.dart';
-
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -24,6 +25,9 @@ class _HomePageState extends State<HomePage> {
   DateTime _selectedDate =DateTime.now();
   final _taskController =Get.put(TaskController());
   var notifyHelper;
+  File? _image;
+
+ 
   @override
   void initState() {
     super.initState();
@@ -35,6 +39,18 @@ class _HomePageState extends State<HomePage> {
     });
     
   }
+
+  void _pickImage() async {
+  final imagePicker = ImagePicker();
+  final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+
+  if (pickedImage != null) {
+    setState(() {
+      _image = File(pickedImage.path);
+    });
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     print("Build method called");
@@ -311,15 +327,21 @@ class _HomePageState extends State<HomePage> {
   color: Get.isDarkMode ? Colors.white : Colors.black,
 )
      ), 
-     actions: const [
-      CircleAvatar(
-        backgroundImage: AssetImage(
-          "images/user.png"
-        ),
-      ),
-    
+     actions: [
+      GestureDetector(
+  onTap: _pickImage,
+  child: CircleAvatar(
+    backgroundImage: _image != null
+        ? FileImage(_image!)
+        : AssetImage("images/user.png") as ImageProvider,
+  ),
+),
+
+   
       SizedBox(width: 20,)
      ],
     );
   }
+
+
 }
